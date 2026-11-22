@@ -106,22 +106,19 @@ def summarize_csv_to_json(csv_path: str, json_path: str) -> Dict[str, Any]:
 
 
 class StudentRecord:
-    """Tracks weekly evaluation scores for a single DSC recruit."""
+   
 
     def __init__(self, usn: str, name: str):
-        """Initialize record with uppercase USN, name, and empty scores list."""
         self.usn = usn.upper()
         self.name = name
         self.scores: List[float] = []
 
     def add_score(self, score: float) -> None:
-        """Append a score (must be between 0 and 100; raise ValueError otherwise)."""
         if score < 0 or score > 100:
             raise ValueError("score must be between 0 and 100")
         self.scores.append(score)
 
     def average(self) -> float:
-        """Return average score rounded to 2 decimals, or 0.0 if no scores exist."""
         if len(self.scores) == 0:
             return 0.0
 
@@ -130,5 +127,4 @@ class StudentRecord:
         return round(total / count, 2)
 
     def is_passing(self, threshold: float = 50.0) -> bool:
-        """Return True if average() >= threshold, else False."""
         return self.average() >= threshold
